@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="عبد الرحمن هديب - تقني تكنولوجيا المعلومات والأمن السيبراني">
+    <title>عبد الرحمن هديب - تقني تكنولوجيا المعلومات والأمن السيبراني</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #00ff88;
+            --bg-dark: #0a0e27;
+            --bg-dark-light: #1a1f3a;
+            --text-light: #b8c5d6;
+            --text-white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-dark-light) 100%);
+            color: var(--text-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body[dir="ltr"] {
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 5%;
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .lang-switcher {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lang-switcher:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(10, 14, 39, 0.8) 100%);
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-100px) translateX(50px);
+                opacity: 0.8;
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+            max-width: 900px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 5px var(--primary-color));
+            }
+            to {
+                filter: drop-shadow(0 0 20px var(--primary-color));
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .typing-effect {
+            display: inline-block;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: var(--primary-color); }
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--bg-dark);
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+        }
+
+        .section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-image-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            object-fit: cover;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(0, 212, 255, 0.8);
+            }
+        }
+
+        .about-text {
+            background: rgba(26, 31, 58, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(26, 31, 58, 0.6);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-timeline {
+            position: relative;
+        }
+
+        [dir="rtl"] .experience-timeline {
+            padding-right: 2rem;
+        }
+
+        [dir="ltr"] .experience-timeline {
+            padding-left: 2rem;
+        }
+
+        .experience-item {
+            background: rgba(26, 31, 58, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        [dir="rtl"] .experience-item {
+            border-right: 4px solid var(--primary-color);
+        }
+
+        [dir="ltr"] .experience-item {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        [dir="rtl"] .experience-item:hover {
+            transform: translateX(-10px);
+        }
+
+        [dir="ltr"] .experience-item:hover {
+            transform: translateX(10px);
+        }
+
+        .experience-item:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-date {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(26, 31, 58, 0.6);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--secondary-color);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
+        }
+
+        .skill-name {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .education-card {
+            background: rgba(26, 31, 58, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .education-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-school {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(26, 31, 58, 0.6);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            text-align: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            border-color: var(--secondary-color);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            background: rgba(10, 14, 39, 0.95);
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 2px solid var(--primary-color);
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--bg-dark);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 999;
+            border: none;
+            font-size: 1.5rem;
+        }
+
+        [dir="rtl"] .scroll-to-top {
+            left: 2rem;
+        }
+
+        [dir="ltr"] .scroll-to-top {
+            right: 2rem;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.5);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            z-index: 1001;
+            transition: width 0.1s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.5rem;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                background: rgba(10, 14, 39, 0.98);
+                width: 100%;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                transform: translateX(100%);
+                transition: transform 0.3s;
+                border-bottom: 2px solid var(--primary-color);
+            }
+
+            [dir="rtl"] .nav-links {
+                right: 0;
+                transform: translateX(100%);
+            }
+
+            [dir="ltr"] .nav-links {
+                left: 0;
+                transform: translateX(-100%);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .section {
+                padding: 3rem 5%;
+            }
+        }
+
+        @media (max-width: 568px) {
+            .hero-title {
+                font-size: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loading.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 212, 255, 0.3);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading">
+        <div class="loader"></div>
+    </div>
+
+    <div class="progress-bar"></div>
+
+    <nav class="navbar">
+        <div class="logo" onclick="scrollToSection('home')">AH</div>
+        <div class="nav-container">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                <li><a href="#about" data-ar="عني" data-en="About">عني</a></li>
+                <li><a href="#experience" data-ar="الخبرات" data-en="Experience">الخبرات</a></li>
+                <li><a href="#skills" data-ar="المهارات" data-en="Skills">المهارات</a></li>
+                <li><a href="#education" data-ar="التعليم" data-en="Education">التعليم</a></li>
+                <li><a href="#contact" data-ar="التواصل" data-en="Contact">التواصل</a></li>
+            </ul>
+            <button class="lang-switcher" onclick="toggleLanguage()">
+                <span id="langText">EN</span>
+                <span>🌐</span>
+            </button>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1 class="hero-title" data-ar="عبد الرحمن هديب" data-en="Abdalrahman Hdaib">عبد الرحمن هديب</h1>
+            <h2 class="hero-subtitle">
+                <span class="typing-effect" data-ar="تقني تكنولوجيا المعلومات والأمن السيبراني" data-en="IT & Cybersecurity Technician">تقني تكنولوجيا المعلومات والأمن السيبراني</span>
+            </h2>
+            <p class="hero-description" data-ar="محترف في مجال تكنولوجيا المعلومات مع خبرة واسعة في الأمن السيبراني، صيانة الأجهزة، وإدارة البنية التحتية التقنية. متخصص في حماية الأنظمة وتطوير حلول تقنية مبتكرة." data-en="IT professional with extensive experience in cybersecurity, hardware maintenance, and technical infrastructure management. Specialized in system protection and developing innovative technical solutions.">
+                محترف في مجال تكنولوجيا المعلومات مع خبرة واسعة في الأمن السيبراني، صيانة الأجهزة، وإدارة البنية التحتية التقنية. متخصص في حماية الأنظمة وتطوير حلول تقنية مبتكرة.
+            </p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary" data-ar="تواصل معي" data-en="Contact Me">تواصل معي</a>
+                <a href="https://www.linkedin.com/in/abdalrahman-hdaib" target="_blank" class="btn btn-secondary">LinkedIn</a>
+            </div>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/abdalrahman-hdaib" target="_blank" class="social-link" title="LinkedIn">💼</a>
+                <a href="mailto:contact@example.com" class="social-link" title="Email">📧</a>
+                <a href="https://github.com" target="_blank" class="social-link" title="GitHub">💻</a>
+            </div>
+        </div>
+        <div class="scroll-indicator" onclick="scrollToSection('about')">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+                <path d="M15 5V25M15 25L10 20M15 25L20 20" stroke="#00d4ff" stroke-width="2"/>
+            </svg>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <h2 class="section-title" data-ar="عني" data-en="About Me">عني</h2>
+        <div class="about-content">
+            <div class="about-image-container">
+                <svg class="about-image" viewBox="0 0 200 200">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#00ff88;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="100" cy="100" r="95" fill="#1a1f3a" stroke="url(#grad1)" stroke-width="3"/>
+                    <circle cx="100" cy="80" r="30" fill="url(#grad1)"/>
+                    <path d="M 60 140 Q 100 180 140 140" fill="url(#grad1)"/>
+                </svg>
+            </div>
+            <div class="about-text">
+                <p data-ar="محترف متمرس في مجال تكنولوجيا المعلومات والأمن السيبراني، مع خبرة متعمقة في صيانة الأجهزة والشبكات، وإدارة المخزون، والدعم الفني. أتمتع بمهارات قوية في استكشاف الأخطاء وحل المشكلات التقنية المعقدة." data-en="Experienced IT and Cybersecurity professional with in-depth expertise in hardware and network maintenance, inventory management, and technical support. Strong skills in troubleshooting and resolving complex technical issues.">
+                    محترف متمرس في مجال تكنولوجيا المعلومات والأمن السيبراني، مع خبرة متعمقة في صيانة الأجهزة والشبكات، وإدارة المخزون، والدعم الفني. أتمتع بمهارات قوية في استكشاف الأخطاء وحل المشكلات التقنية المعقدة.
+                </p>
+            </div>
+        </div>
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">4+</div>
+                <div data-ar="سنوات خبرة" data-en="Years Experience">سنوات خبرة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5+</div>
+                <div data-ar="وظائف متنوعة" data-en="Diverse Positions">وظائف متنوعة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div data-ar="مهارة تقنية" data-en="Technical Skills">مهارة تقنية</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="experience">
+        <h2 class="section-title" data-ar="الخبرات العملية" data-en="Work Experience">الخبرات العملية</h2>
+        <div class="experience-timeline">
+            <div class="experience-item">
+                <h3 class="experience-title" data-ar="أخصائي مبيعات خدمة العملاء" data-en="Customer Service Sales Specialist">أخصائي مبيعات خدمة العملاء</h3>
+                <div class="experience-company">Napoli & Torino Computer Company</div>
+                <div class="experience-date" data-ar="أكتوبر 2021 - يوليو 2025 (3 سنوات و 10 أشهر)" data-en="October 2021 - July 2025 (3 years 10 months)">أكتوبر 2021 - يوليو 2025 (3 سنوات و 10 أشهر)</div>
+                <p data-ar="قيادة عمليات خدمة العملاء الحاسوبية. استكشاف وحل مشاكل الأجهزة والبرمجيات. تقديم معلومات مفصلة حول الحلول والمنتجات. إدارة المخزون وأفضل ممارسات البيع." data-en="Leading computer customer service operations. Troubleshooting hardware and software issues. Providing detailed information about solutions and products. Inventory management and best sales practices.">قيادة عمليات خدمة العملاء الحاسوبية. استكشاف وحل مشاكل الأجهزة والبرمجيات. تقديم معلومات مفصلة حول الحلول والمنتجات. إدارة المخزون وأفضل ممارسات البيع.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title" data-ar="إدارة المستودعات والمخزون" data-en="Warehouse & Inventory Management">إدارة المستودعات والمخزون</h3>
+                <div class="experience-company">Napoli & Torino Computer Company</div>
+                <div class="experience-date" data-ar="يوليو 2022 - فبراير 2025 (2 سنوات و 8 أشهر)" data-en="July 2022 - February 2025 (2 years 8 months)">يوليو 2022 - فبراير 2025 (2 سنوات و 8 أشهر)</div>
+                <p data-ar="إدارة العمليات في المستودع والمخزون. تتبع وإدارة حركة المخزون باستخدام أدوات المراقبة. المساعدة في استكشاف مشاكل الأجهزة والبرمجيات." data-en="Managing warehouse and inventory operations. Tracking and managing inventory movement using monitoring tools. Assisting in troubleshooting hardware and software issues.">إدارة العمليات في المستودع والمخزون. تتبع وإدارة حركة المخزون باستخدام أدوات المراقبة. المساعدة في استكشاف مشاكل الأجهزة والبرمجيات.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title" data-ar="الدعم التقني والصيانة" data-en="Technical Support & Maintenance">الدعم التقني والصيانة</h3>
+                <div class="experience-company">Napoli & Torino Computer Company</div>
+                <div class="experience-date" data-ar="يونيو 2021 - فبراير 2025 (3 سنوات و 9 أشهر)" data-en="June 2021 - February 2025 (3 years 9 months)">يونيو 2021 - فبراير 2025 (3 سنوات و 9 أشهر)</div>
+                <p data-ar="تقديم الدعم التقني والصيانة لأجهزة الكمبيوتر. المساعدة في تشخيص الأعطال البرمجية والمشاكل التقنية. العمل بفعالية على استكشاف الأخطاء وحل مشاكل الأجهزة والبرمجيات." data-en="Providing technical support and maintenance for computer hardware. Assisting in diagnosing software failures and technical issues. Effectively troubleshooting and resolving hardware and software problems.">تقديم الدعم التقني والصيانة لأجهزة الكمبيوتر. المساعدة في تشخيص الأعطال البرمجية والمشاكل التقنية. العمل بفعالية على استكشاف الأخطاء وحل مشاكل الأجهزة والبرمجيات.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3 class="experience-title" data-ar="متدرب فني كمبيوتر" data-en="Computer Technician Intern">متدرب فني كمبيوتر</h3>
+                <div class="experience-company">Napoli Computer Company</div>
+                <div class="experience-date" data-ar="يناير 2021 - أكتوبر 2021 (10 أشهر)" data-en="January 2021 - October 2021 (10 months)">يناير 2021 - أكتوبر 2021 (10 أشهر)</div>
+                <p data-ar="التدريب في شركة Napoli Computer Company. المساعدة في إصلاح الأجهزة وتحديد المشاكل. تعلم تشخيص أعطال الأجهزة الأساسية وحل مشاكل البرمجيات." data-en="Training at Napoli Computer Company. Assisting in hardware repair and problem identification. Learning to diagnose basic hardware failures and solve software problems.">التدريب في شركة Napoli Computer Company. المساعدة في إصلاح الأجهزة وتحديد المشاكل. تعلم تشخيص أعطال الأجهزة الأساسية وحل مشاكل البرمجيات.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="skills">
+        <h2 class="section-title" data-ar="المهارات" data-en="Skills">المهارات</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-name">🔒 <span data-ar="الأمن السيبراني" data-en="Cybersecurity">الأمن السيبراني</span></div>
+                <p data-ar="إدارة الأمان، أمن الشبكات، اختبار الاختراق، كشف التهديدات" data-en="Security management, network security, penetration testing, threat detection">إدارة الأمان، أمن الشبكات، اختبار الاختراق، كشف التهديدات</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-name">🛠️ <span data-ar="صيانة الأجهزة" data-en="Hardware Maintenance">صيانة الأجهزة</span></div>
+                <p data-ar="إصلاح وصيانة أجهزة الكمبيوتر واستكشاف الأخطاء" data-en="Computer repair, maintenance and troubleshooting">إصلاح وصيانة أجهزة الكمبيوتر واستكشاف الأخطاء</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-name">💻 <span data-ar="البرمجة والتشفير" data-en="Programming & Cryptography">البرمجة والتشفير</span></div>
+                <p data-ar="تطوير البرمجيات وحل المشاكل التقنية" data-en="Software development and technical problem solving">تطوير البرمجيات وحل المشاكل التقنية</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-name">🌐 <span data-ar="إدارة الشبكات" data-en="Network Management">إدارة الشبكات</span></div>
+                <p data-ar="تصميم وإدارة البنية التحتية للشبكات" data-en="Designing and managing network infrastructure">تصميم وإدارة البنية التحتية للشبكات</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-name">📊 <span data-ar="المبيعات بالتجزئة" data-en="Retail Sales">المبيعات بالتجزئة</span></div>
+                <p data-ar="خدمة العملاء وإدارة المبيعات" data-en="Customer service and sales management">خدمة العملاء وإدارة المبيعات</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-name">🔧 <span data-ar="معرفة بالأجهزة والبرمجيات" data-en="Hardware & Software Knowledge">معرفة بالأجهزة والبرمجيات</span></div>
+                <p data-ar="فهم شامل للأنظمة التقنية" data-en="Comprehensive understanding of technical systems">فهم شامل للأنظمة التقنية</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="education">
+        <h2 class="section-title" data-ar="التعليم" data-en="Education">التعليم</h2>
+        <!--<div class="education-card">
+            <h3 class="education-title" data-ar="بكالوريوس في الأمن السيبراني" data-en="Bachelor in Cybersecurity">بكالوريوس في الأمن السيبراني</h3>
+            <div class="education-school">Luminus Technical University College</div>
+            <div class="experience-date">2021 - 2026</div>
+            <p data-ar="تخصص في الأمن السيبراني مع التركيز على: إدارة الأمن المعلوماتي، أمن الشبكات، التشفير التطبيقي، التشفير في السحابة، التصميم المعماري الآمن، اختبار الاختراق." data-en="Major in Cybersecurity focusing on: Information Security Management, Network Security, Applied Cryptography, Cloud Encryption, Secure Architecture Design, Penetration Testing.">تخصص في الأمن السيبراني مع التركيز على: إدارة الأمن المعلوماتي، أمن الشبكات، التشفير التطبيقي، التشفير في السحابة، التصميم المعماري الآمن، اختبار الاختراق.</p>
+        </div>-->
+        <div class="education-card">
+            <h3 class="education-title" data-ar="دبلوم وطني عالي في علوم الكمبيوتر والأمن السيبراني" data-en="Higher National Diploma in Computer Science & Cybersecurity">دبلوم وطني عالي في علوم الكمبيوتر والأمن السيبراني</h3>
+            <div class="education-school">Luminus Technical University College</div>
+            <div class="experience-date">2022 - 2026</div>
+            <p data-ar="التركيز على علوم الكمبيوتر، الأمن السيبراني، والبرمجة." data-en="Focus on Computer Science, Cybersecurity, and Programming.">التركيز على علوم الكمبيوتر، الأمن السيبراني، والبرمجة.</p>
+        </div>
+        
+        <h3 class="section-title" style="font-size: 2rem; margin-top: 3rem;" data-ar="الدورات والشهادات" data-en="Courses & Certifications">الدورات والشهادات</h3>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-name" data-ar="دورة المسار السريع CCT - أمن الشبكات" data-en="CCT Fast Track Course - Network Security">CCT Fast Track Course - Network Security</div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-name" data-ar="دورة المساعد السيبراني - أمن الشبكات" data-en="Cyber Associate Course - Network Security">Cyber Associate Course - Network Security</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <h2 class="section-title" data-ar="تواصل معي" data-en="Contact Me">تواصل معي</h2>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3 data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</h3>
+                <p data-ar="تواصل معي عبر البريد الإلكتروني" data-en="Contact me via email">تواصل معي عبر البريد الإلكتروني</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">💼</div>
+                <h3>LinkedIn</h3>
+                <p><a href="https://www.linkedin.com/in/abdalrahman-hdaib" target="_blank" style="color: #00d4ff; text-decoration: none;" data-ar="زيارة الملف الشخصي" data-en="Visit Profile">زيارة الملف الشخصي</a></p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">📱</div>
+                <h3 data-ar="الموقع" data-en="Location">الموقع</h3>
+                <p data-ar="عمّان، الأردن" data-en="Amman, Jordan">عمّان، الأردن</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p data-ar="&copy; 2025 عبد الرحمن هديب. جميع الحقوق محفوظة." data-en="&copy; 2025 Abdalrahman Hdaib. All rights reserved.">&copy; 2025 عبد الرحمن هديب. جميع الحقوق محفوظة.</p>
+        <p style="margin-top: 0.5rem; color: #b8c5d6;" data-ar="مستعد لتطبيق المهارات التقنية ومعرفة الأمن السيبراني لدعم العمليات ونمو الأعمال" data-en="Ready to apply technical skills and cybersecurity knowledge to support operations and business growth">مستعد لتطبيق المهارات التقنية ومعرفة الأمن السيبراني لدعم العمليات ونمو الأعمال</p>
+    </footer>
+
+    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loading').classList.add('hide');
+            }, 1000);
+        });
+
+        // Create particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 5 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.background = Math.random() > 0.5 ? '#00d4ff' : '#00ff88';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = Math.random() * 20 + 10 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Scroll to top button
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.querySelector('.scroll-to-top');
+            const navbar = document.querySelector('.navbar');
+            const progressBar = document.querySelector('.progress-bar');
+            
+            // Show/hide scroll to top button
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+
+            // Navbar scroll effect
+            if (window.pageYOffset > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Progress bar
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.pageYOffset / scrollHeight) * 100;
+            progressBar.style.width = scrolled + '%';
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // Language toggle
+        let currentLang = 'ar';
+        
+        function toggleLanguage() {
+            const html = document.querySelector('html');
+            const langText = document.getElementById('langText');
+            
+            if (currentLang === 'ar') {
+                currentLang = 'en';
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                langText.textContent = 'AR';
+                updateContent('en');
+            } else {
+                currentLang = 'ar';
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+                langText.textContent = 'EN';
+                updateContent('ar');
+            }
+        }
+
+        function updateContent(lang) {
+            document.querySelectorAll('[data-ar]').forEach(element => {
+                if (lang === 'ar') {
+                    element.textContent = element.getAttribute('data-ar');
+                } else {
+                    element.textContent = element.getAttribute('data-en');
+                }
+            });
+        }
+
+        // Typing effect
+        const typingElements = document.querySelectorAll('.typing-effect');
+        typingElements.forEach(element => {
+            const text = element.textContent;
+            element.textContent = '';
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            };
+            setTimeout(typeWriter, 500);
+        });
+    </script>
+</body>
+</html>
+                <p data-ar="خلال مسيرتي المهنية في شركة Napoli & Torino Computer Company، قمت بإدارة عمليات خدمة العملاء الحاسوبية، وحل مشاكل الأجهزة والبرمجيات، وتطبيق أفضل ممارسات إدارة المخزون والصيانة." data-en="Throughout my career at Napoli & Torino Computer Company, I managed computer customer service operations, solved hardware and software problems, and implemented best practices for inventory management and maintenance.">
+                    خلال مسيرتي المهنية في شركة Napoli & Torino Computer Company، قمت بإدارة عمليات خدمة العملاء الحاسوبية، وحل مشاكل الأجهزة والبرمجيات، وتطبيق أفضل ممارسات إدارة المخزون والصيانة.
+                </p>
+                <p data-ar="أسعى دائماً لتطبيق مهاراتي التقنية ومعرفتي في مجال الأمن السيبراني لتحسين العمليات ودعم نمو الأعمال." data-en="I constantly strive to apply my technical skills and cybersecurity knowledge to improve operations and support business growth.">
+                    أسعى دائماً لتطبيق مهاراتي التقنية ومعرفتي في مجال الأمن السيبراني لتحسين العمليات ودعم نمو الأعمال.
