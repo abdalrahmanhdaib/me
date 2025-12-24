@@ -838,6 +838,41 @@
         <h2 class="section-title" data-ar="عني" data-en="About Me">عني</h2>
         <div class="about-content">
             <div class="about-image-container">
+    <svg class="about-image" viewBox="0 0 200 200">
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#00ff88;stop-opacity:1" />
+            </linearGradient>
+
+            <!-- قص دائري للصورة -->
+            <clipPath id="circleClip">
+                <circle cx="100" cy="80" r="30" />
+            </clipPath>
+        </defs>
+
+        <!-- الإطار الخارجي -->
+        <circle cx="100" cy="100" r="95"
+                fill="#1a1f3a"
+                stroke="url(#grad1)"
+                stroke-width="3"/>
+
+        <!-- الصورة داخل دائرة -->
+        <image
+            href="3040.png"
+            x="70"
+            y="50"
+            width="60"
+            height="60"
+            clip-path="url(#circleClip)"
+            preserveAspectRatio="xMidYMid slice"
+        />
+
+        <!-- الجزء السفلي -->
+        <path d="M 60 140 Q 100 180 140 140" fill="url(#grad1)"/>
+    </svg>
+</div>
+            <!--<div class="about-image-container">
                 <svg class="about-image" viewBox="0 0 200 200">
                     <defs>
                         <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -849,7 +884,7 @@
                     <circle cx="100" cy="80" r="30" fill="url(#grad1)"/>
                     <path d="M 60 140 Q 100 180 140 140" fill="url(#grad1)"/>
                 </svg>
-            </div>
+            </div>-->
             <div class="about-text">
                 <p data-ar="محترف متمرس في مجال تكنولوجيا المعلومات والأمن السيبراني، مع خبرة متعمقة في صيانة الأجهزة والشبكات، وإدارة المخزون، والدعم الفني. أتمتع بمهارات قوية في استكشاف الأخطاء وحل المشكلات التقنية المعقدة." data-en="Experienced IT and Cybersecurity professional with in-depth expertise in hardware and network maintenance, inventory management, and technical support. Strong skills in troubleshooting and resolving complex technical issues.">
                     محترف متمرس في مجال تكنولوجيا المعلومات والأمن السيبراني، مع خبرة متعمقة في صيانة الأجهزة والشبكات، وإدارة المخزون، والدعم الفني. أتمتع بمهارات قوية في استكشاف الأخطاء وحل المشكلات التقنية المعقدة.
